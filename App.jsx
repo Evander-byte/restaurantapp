@@ -12,6 +12,8 @@ import SummaryOrder from './views/SummaryOrder'
 import ProgressOrder from './views/ProgressOrder'
 //import state of context
 import FirebaseState from './context/firebase/firebaseState'
+import OrderContext from './context/orders/ordersContext'
+import OrderState from './context/orders/ordersState'
 
 
 const Stack = createStackNavigator()
@@ -22,62 +24,64 @@ function App() {
   return (
     <>
     <FirebaseState>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: '#FFDA00'
-            },
-            headerBackTitleStyle: {
-              fontWeight: 'bold'
-              
-            }
-          }}
-        >
-          <Stack.Screen
-            name="NewOrder"
-            component={NewOrder}
-            options={{
-              title:"New order"
+      <OrderState>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: '#FFDA00'
+              },
+              headerBackTitleStyle: {
+                fontWeight: 'bold'
+                
+              }
             }}
-          />
-          <Stack.Screen
-            name="Menu"
-            component={Menu}
-            options={{
-              title:"Our menu"
-            }}
-          />
-          <Stack.Screen
-            name="DishDetail"
-            component={Detail}
-            options={{
-              title:"Dish"
-            }}
-          />
-          <Stack.Screen
-            name="FormDish"
-            component={FormDish}
-            options={{
-              title:"Order your dish"
-            }}
-          />
-          <Stack.Screen
-            name="SummaryOrder"
-            component={SummaryOrder}
-            options={{
-              title:"Summary"
-            }}
-          />
-          <Stack.Screen
-            name="ProgressOrder"
-            component={ProgressOrder}
-            options={{
-              title:"Progress order"
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+          >
+            <Stack.Screen
+              name="NewOrder"
+              component={NewOrder}
+              options={{
+                title:"New order"
+              }}
+            />
+            <Stack.Screen
+              name="Menu"
+              component={Menu}
+              options={{
+                title:"Our menu"
+              }}
+            />
+            <Stack.Screen
+              name="DishDetail"
+              component={Detail}
+              options={{
+                title:"Dish"
+              }}
+            />
+            <Stack.Screen
+              name="FormDish"
+              component={FormDish}
+              options={{
+                title:"Order your dish"
+              }}
+            />
+            <Stack.Screen
+              name="SummaryOrder"
+              component={SummaryOrder}
+              options={{
+                title:"Summary"
+              }}
+            />
+            <Stack.Screen
+              name="ProgressOrder"
+              component={ProgressOrder}
+              options={{
+                title:"Progress order"
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </OrderState>
     </FirebaseState>
     </>
   );
