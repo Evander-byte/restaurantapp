@@ -1,7 +1,8 @@
 import React, { Fragment, useContext, useEffect } from 'react'
-import { View, ScrollView, Text, Image, StyleSheet } from 'react-native'
+import { View, ScrollView, Text, Image, StyleSheet, Pressable } from 'react-native'
 import FirebaseContext from '../context/firebase/firebaseContext'
-import globalStyles from '../styles/global'
+import OrderContext from '../context/orders/ordersContext'
+import { useNavigation } from '@react-navigation/native'
 
 const Menu = () => {
 
@@ -12,14 +13,40 @@ const Menu = () => {
   }
   = useContext(FirebaseContext)
 
+  //Context of order
+  const {
+    selectDish
+  } = useContext(OrderContext)
+
+  //Navigation
+  const navigation = useNavigation()
+
   useEffect(() => {
     getProducts()
   }, [])
 
+  const showHeading = (category, i) => {
+    if(i > 0){
+      const lastCategory = menu[i-1].category
+      if(lastCategory !== category){
+        return (
+          <View style={styles.separator}>
+            <Text style={styles.separatorText}>{category}</Text>
+          </View>
+        )
+      }
+    } else {
+      return(
+        <View style={styles.separator}>
+        <Text style={styles.separatorText}>{category}</Text>
+      </View>
+      )
+    }
+  }
 
   return (
     <ScrollView style={styles.container}>
-        {menu.map(dish => {
+        {menu.map((dish, i) => {
           const {
             id,
             name,
@@ -32,7 +59,16 @@ const Menu = () => {
             <Fragment
               key={id}
             >
-              <View style={styles.itemContainer}>
+              {showHeading(category, i)}
+              <Pressable 
+                style={styles.itemContainer}
+                onLongPress={() => {
+                  //Delete properties on the dish
+                  const { avalible, ...dish2 } = dish
+                  selectDish(dish2)
+                  navigation.navigate('DishDetail')
+                }}
+              >
                 <View>
                   <Image 
                     style={styles.image}
@@ -44,7 +80,7 @@ const Menu = () => {
                   <Text style={styles.description}>{description}</Text>
                   <Text style={styles.description}>${price}</Text>
                 </View>
-              </View>
+              </Pressable>
             </Fragment>
           )
         })}
@@ -87,6 +123,14 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     padding: 10
+  },
+  separator: {
+    backgroundColor: '#000'
+  },
+  separatorText: {
+    color: '#FFDA00',
+    fontWeight: 'bold',
+    textTransform: 'uppercase'
   }
 })
 

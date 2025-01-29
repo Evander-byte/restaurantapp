@@ -1,5 +1,7 @@
 import React, { useReducer } from 'react'
 
+
+import _ from 'lodash'
 import FirebaseReducer from './firebaseReducer'
 import FirebaseContext from './firebaseContext'
 import firebase from '../../firebase'
@@ -30,12 +32,15 @@ const FirebaseState = props => {
                     ...doc.data()
                 }
             })
+            //Order by category with lodash
+            dishes = _.sortBy(dishes, 'category')
 
             dispatch({
                 type: SUCCESS_GET_PRODUCTS,
                 payload: dishes
             })
         }
+
         
 
 
