@@ -33,8 +33,8 @@ function App() {
               },
               headerBackTitleStyle: {
                 fontWeight: 'bold'
-                
-              }
+              },
+              headerTintColor: '#000'
             }}
           >
             <Stack.Screen
