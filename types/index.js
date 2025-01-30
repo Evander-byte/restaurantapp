@@ -2,3 +2,4 @@ export const SUCCESS_GET_PRODUCTS = 'SUCCESS_GET_PRODUCTS'
 
 //State of order
 export const SELECT_PRODUCT = 'SELECT_PRODUCT'
+export const  CONFIRM_ORDER_DISH = 'CONFIRM_ORDER_DISH'
