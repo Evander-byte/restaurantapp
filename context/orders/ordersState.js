@@ -3,7 +3,8 @@ import OrderContext from "./ordersContext"
 import orderReducer from "./orderReducer"
 import { 
     SELECT_PRODUCT,
-    CONFIRM_ORDER_DISH 
+    CONFIRM_ORDER_DISH,
+    SHOW_SUMARRY 
 } from "../../types"
 
 
@@ -11,7 +12,8 @@ import {
 const OrderState = props => {
     const initialState = {
         order: [],
-        dishe: null
+        dishe: null,
+        total: 0
     }
 
     // useReducer with dispatch to execute the functions
@@ -32,14 +34,24 @@ const OrderState = props => {
             payload: order
         })
     }
+
+    // Calculate total to pay
+    const showSummary = total => {
+        dispatch({
+            type: SHOW_SUMARRY,
+            payload: total
+        })
+    }
  
     return(
         <OrderContext.Provider
             value={{
                 order: state.order,
                 dish: state.dish,
+                total: state.total,
                 selectDish,
-                saveOrder
+                saveOrder,
+                showSummary
             }}
         >
             {props.children}

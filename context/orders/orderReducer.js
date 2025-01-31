@@ -1,6 +1,7 @@
 import { 
     SELECT_PRODUCT,
-    CONFIRM_ORDER_DISH 
+    CONFIRM_ORDER_DISH, 
+    SHOW_SUMARRY
 } from "../../types";
 
 
@@ -16,6 +17,11 @@ export default (state, action) => {
             return{
                 ...state,
                 order: [...state.order, action.payload]
+            }
+        case SHOW_SUMARRY:
+            return{
+                ...state,
+                total: action.payload
             }
         default:
             return state;
