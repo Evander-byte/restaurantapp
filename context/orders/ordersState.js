@@ -4,7 +4,9 @@ import orderReducer from "./orderReducer"
 import { 
     SELECT_PRODUCT,
     CONFIRM_ORDER_DISH,
-    SHOW_SUMARRY 
+    SHOW_SUMARRY, 
+    REMOVE_DISH,
+    ORDER_PLACED
 } from "../../types"
 
 
@@ -13,7 +15,8 @@ const OrderState = props => {
     const initialState = {
         order: [],
         dishe: null,
-        total: 0
+        total: 0,
+        idorder: ''
     }
 
     // useReducer with dispatch to execute the functions
@@ -42,6 +45,21 @@ const OrderState = props => {
             payload: total
         })
     }
+
+    // Delete a dish on the order
+    const removeDish = id => {
+        dispatch({
+            type: REMOVE_DISH,
+            payload: id
+        })
+    }
+
+    const orderPlaced = id => {
+        dispatch({
+            type: ORDER_PLACED,
+            payload: id
+        })
+    }
  
     return(
         <OrderContext.Provider
@@ -49,9 +67,12 @@ const OrderState = props => {
                 order: state.order,
                 dish: state.dish,
                 total: state.total,
+                idorder: state.idorder,
                 selectDish,
                 saveOrder,
-                showSummary
+                showSummary,
+                removeDish,
+                orderPlaced
             }}
         >
             {props.children}

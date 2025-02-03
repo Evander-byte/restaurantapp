@@ -1,10 +1,13 @@
 import { useNavigation } from '@react-navigation/native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import globalStyles from '../../styles/global'
+import OrderContext from '../../context/orders/ordersContext'
 
 const SummaryButton = () => {
     const navigation = useNavigation()
+    const { order } = useContext(OrderContext)
+    if(order.length === 0) return null
   return (
     <Pressable
         style={[globalStyles.button, styles.button]}

@@ -1,7 +1,9 @@
 import { 
     SELECT_PRODUCT,
     CONFIRM_ORDER_DISH, 
-    SHOW_SUMARRY
+    SHOW_SUMARRY,
+    REMOVE_DISH,
+    ORDER_PLACED
 } from "../../types";
 
 
@@ -22,6 +24,19 @@ export default (state, action) => {
             return{
                 ...state,
                 total: action.payload
+            }
+        case REMOVE_DISH:
+            return{
+                ...state,
+                order: state.order.filter(dish => dish.id !== action.payload)
+            }
+        case ORDER_PLACED: 
+            return{
+                ...state,
+                order: [],
+                dishe: null,
+                total: 0,
+                idorder: action.payload
             }
         default:
             return state;
